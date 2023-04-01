@@ -14,104 +14,78 @@
     <title>Generador de documentos</title>
 </head>
 
-
-<header>
-   
-    <div class="headerlogo">
-        <a href="#"><img src="Materials/LilMC.png" alt=""></a>
-    </div>
-    <div class="headerlogo">
-        <img src="Materials/GNMB.png" alt="">
-    </div>
-
-</header>
-
-
-
 <body>
-    <div class="containerp" >
-        <!--Columna del selector-->
+    <div class="nav-bar">
+        <div class="nav-bar-item">
+            <a><img src="Materials/LilMC.png" width="50" height="50" alt="MC Logo"></a>
+        </div>
+        <div class="nav-bar-item">
+            <a><img src="Materials/GNMB.png" width="150" height="50" alt="GNMB Logo"></a>
+        </div>
+    </div>    
+
+    <div class="container">
+        
         <div class="login-container">
+            <h1>Generador de Documentos</h1>
 
             <!--Script del selector del tipo de consulta-->
             <script type="text/javascript" src="js/Selector1.js"></script>
 
             <!--Selector del tipo de consulta-->
             <div class="selector">
-                <p>Seleccione el tipo de documento</p>
-                <center>
-                    <select name="Tipo" id="selector1" onchange="M1(this.value);">
-
-                        <!--<option value="0">Selecciona</option>-->
-                        <option value="b1">Certificado laboral</option>
-                        <option value="b2">Retiro de cesantias</option>
-                        <option value="b3">Apertura de cuenta</option>
-                        <!--<option value="b4">Camel</option>-->
-
-                    </select>
-                </center>
+                <label for="selector1">Documento a Generar</label>
+                <select name="Tipo" id="selector1" onchange="M1(this.value);">
+                    <option value="b1">Certificado Laboral</option>
+                    <option value="b2">Retiro de Cesantias</option>
+                    <option value="b3">Apertura de Cuenta</option>
+                </select>
             </div>
-            <!--Cuadros para ingreso de datos-->
-            <div id="b1">
+
+                <!--Cuadros para ingreso de datos-->
+
+            <div class="selector" id="b1">
                 <form id="form1" action="Certificado_Laboral.php" method="POST" target="_blank">
-
-                    <h3 class="titulos">Ingresa tu número de identificación</h3>
-                    <center>
-                        <textarea class="busqueda" name="Identificación_1" ></textarea>
-                    </center>
-         
+                    <div class="selector">
+                        <label for="Identificación_1">Número de identificación</label>
+                        <input type="text" name="Identificación_1">
+                    </div>
                     <div class="botonera" style="display: flex; margin:5%; justify-content:space-around;">
-                        <!--Boton de buscar-->
-                        <div class="contbtn">
-                            
+                        <div class="contbtn"> <!--Boton de buscar-->
                             <button type="submit" name="buscar" class="btn boton">Buscar</button>
-
                         </div>
                     </div>
-                    
                 </form>
-            
             </div>
-            <div id="b2">
+
+            <div class="selector" id="b2">
                 <form id="form2" action="Retiro_Cesantias.php" method="POST" target="_blank">
-
-                    <h3 class="titulos">Ingrese nombre 2</h3>
-                    <center>
-                        <textarea class="busqueda" name="Identificación_2" ></textarea>
-                    </center>
-
+                    <div class="selector">
+                        <label for="Identificación_2">Número de identificación</label>
+                        <input type="text" name="Identificación_2">
+                    </div>
                     <div class="botonera" style="display: flex; margin:5%; justify-content:space-around;">
-                        <!--Boton de buscar-->
-                        <div class="contbtn">
-                            
+                        <div class="contbtn"><!--Boton de buscar-->
                             <button type="submit" name="buscar" class="btn boton">Buscar</button>
-
                         </div>
                     </div>
-
-                    </form>
-            
-            </div>
-            <div id="b3">
-                <form id="form1" action="Apertura_Cuenta.php" method="POST" target="_blank">
-
-                    <h3 class="titulos">Ingrese nombre 3</h3>
-                    <center>
-                        <textarea class="busqueda" name="Identificación_3" ></textarea>
-                    </center>
-
-                    <div class="botonera" style="display: flex; margin:5%; justify-content:space-around;">
-                        <!--Boton de buscar-->
-                        <div class="contbtn">
-                            
-                            <button type="submit" name="buscar" class="btn boton">Buscar</button>
-
-                        </div>
-                    </div>
-
                 </form>
-            
             </div>
+
+            <div class="selector" id="b3">
+                <form id="form3" action="Apertura_Cuenta.php" method="POST" target="_blank">
+                    <div class="selector">
+                        <label for="Identificación_3">Número de identificación</label>
+                        <input type="text" name="Identificación_3">
+                    </div>
+                    <div class="botonera" style="display: flex; margin:5%; justify-content:space-around;">
+                        <div class="contbtn"> <!--Boton de buscar-->
+                            <button type="submit" name="buscar" class="btn boton">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
         
 
