@@ -16,15 +16,9 @@
 
 
 <header>
-
-    <?php
-
-
-    ?>
-
-    
+   
     <div class="headerlogo">
-        <a href="../inicio2.php"><img src="Materials/LilMC.png" alt=""></a>
+        <a href="#"><img src="Materials/LilMC.png" alt=""></a>
     </div>
     <div class="headerlogo">
         <img src="Materials/GNMB.png" alt="">
@@ -61,9 +55,9 @@
             <div id="b1">
                 <form id="form1" action="Certificado_Laboral.php" method="POST" target="_blank">
 
-                    <h3 class="titulos">Ingrese nombre 1</h3>
+                    <h3 class="titulos">Ingresa tu número de identificación</h3>
                     <center>
-                        <textarea class="busqueda" name="texto1" ></textarea>
+                        <textarea class="busqueda" name="Identificación_1" ></textarea>
                     </center>
          
                     <div class="botonera" style="display: flex; margin:5%; justify-content:space-around;">
@@ -83,7 +77,7 @@
 
                     <h3 class="titulos">Ingrese nombre 2</h3>
                     <center>
-                        <textarea class="busqueda" name="texto2" ></textarea>
+                        <textarea class="busqueda" name="Identificación_2" ></textarea>
                     </center>
 
                     <div class="botonera" style="display: flex; margin:5%; justify-content:space-around;">
@@ -103,7 +97,7 @@
 
                     <h3 class="titulos">Ingrese nombre 3</h3>
                     <center>
-                        <textarea class="busqueda" name="texto3" ></textarea>
+                        <textarea class="busqueda" name="Identificación_3" ></textarea>
                     </center>
 
                     <div class="botonera" style="display: flex; margin:5%; justify-content:space-around;">
