@@ -8,7 +8,7 @@ if(isset($_POST['texto3'])){
 
    
 
-    $Salchicha = $_POST['texto3'];
+    $Documento = $_POST['texto3'];
     // create document
     $pdf = new FPDF();
     $pdf->AddPage();
@@ -22,7 +22,7 @@ if(isset($_POST['texto3'])){
     $pdf->SetFont('Arial', 'B', 24);
     $pdf->Cell(0, 10, 'Generar archivos PDF con PHP', 0, 1);
     $pdf->Ln();
-    $pdf->Cell(0, 10,  'Hola ' . $Salchicha , 0, 1);
+    $pdf->Cell(0, 10,  'Hola ' . $Documento , 0, 1);
     $pdf->Ln();
 
     // add text
@@ -38,6 +38,6 @@ if(isset($_POST['texto3'])){
     //$pdf->Image('assets/fpdf-code.png', null, null, 180);
 
     // output file
-    $pdf->Output('I', 'Apertura_de_Cuenta_'.$Salchicha.'.pdf');
+    $pdf->Output('I', 'Apertura_de_Cuenta_'.$Documento.'.pdf');
     
 }
