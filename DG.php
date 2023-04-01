@@ -36,6 +36,7 @@
             <div class="selector">
                 <label for="selector1">Documento a Generar</label>
                 <select name="Tipo" id="selector1" onchange="M1(this.value);">
+                    <option value="0">Seleccione</option>
                     <option value="b1">Certificado Laboral</option>
                     <option value="b2">Retiro de Cesantias</option>
                     <option value="b3">Apertura de Cuenta</option>
