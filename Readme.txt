@@ -20,3 +20,5 @@ Al ser un aplicativo de prueba el codigo se ejecuta mediante la app de Xampp y P
 Ruta de guardado de archivos(C:\xampp\htdocs\Proyectos\Documentos_Generados\)
 
 Cargar los archivos.sql en PHPMyadmin
+
+A los archivos que se encuentran dentro de la carperta JS se les debe cambiar la extencion de .txt a .js, esto debido a que GMAIL no permite el envio de archivos terminados en JS
