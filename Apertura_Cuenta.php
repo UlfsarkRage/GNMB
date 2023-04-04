@@ -23,9 +23,7 @@ if(isset($_POST['Identificación_3'])){
         $Correo = $Exist[6];
         
 
-        $sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Apertura de cuenta bancaria','$Correo','N/A')";
-
-        if (mysqli_query($conexion, $sql)) {
+        if (!empty($Nombre)) {
 
           
         
@@ -75,9 +73,19 @@ if(isset($_POST['Identificación_3'])){
             // add image
             $pdf->Image('Materials/Navidaddog.jpg', null, null, 50);
 
-            // output file
-            $pdf->Output('I', 'Solicitud_Apertura_Cuenta_Bancaria'.$Nombre.'.pdf');
+            $pdf->Output('F', 'C:\xampp\htdocs\Proyectos\Documentos_Generados\Apertura_Cuenta_Bancaria_'.$Nombre.' '.$Fecha.'.pdf');
+           
+            $file = file_get_contents('C:\xampp\htdocs\Proyectos\Documentos_Generados\Apertura_Cuenta_Bancaria_'.$Nombre.' '.$Fecha.'.pdf');
+
+            $base64_pdf = base64_encode($file);
+            
+            $sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Apertura Cuenta Bancaria','$Correo','$base64_pdf')";
+            mysqli_query($conexion, $sql);
+
             mysqli_close($conexion);
+            echo "<script> alert('Se han descargado y los archivos correctamente'); </script>";
+            
+            echo "<script> window.location='DG.php'; </script>";
            
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conexion);

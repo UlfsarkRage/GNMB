@@ -23,9 +23,7 @@ if(isset($_POST['Identificación_2'])){
         $Correo = $Exist[6];
         
 
-        $sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Retiro de casantias','$Correo','N/A')";
-
-        if (mysqli_query($conexion, $sql)) {
+        if (!empty($Nombre)) {
 
           
         
@@ -34,7 +32,7 @@ if(isset($_POST['Identificación_2'])){
             $pdf->AddPage();
 
             // config document
-            $pdf->SetTitle('Solicitud_Certificado_Laboral');
+            $pdf->SetTitle('Solicitud_Retiro_Cesantias');
             $pdf->SetAuthor('GNMB');
             $pdf->SetCreator('GNMB');
 
@@ -78,12 +76,20 @@ if(isset($_POST['Identificación_2'])){
             $pdf->MultiCell(0, 7, utf8_decode('Gerente de Recursos Humanos'), 0, 1);
             $pdf->Ln();
 
-            // add image
-            //$pdf->Image('assets/fpdf-code.png', null, null, 180);
 
-            // output file
-            $pdf->Output('I', 'Certificado_Laboral_'.$Nombre.'.pdf');
+            $pdf->Output('F', 'C:\xampp\htdocs\Proyectos\Documentos_Generados\Retiro_Cesantias_'.$Nombre.' '.$Fecha.'.pdf');
+           
+            $file = file_get_contents('C:\xampp\htdocs\Proyectos\Documentos_Generados\Retiro_Cesantias_'.$Nombre.' '.$Fecha.'.pdf');
+
+            $base64_pdf = base64_encode($file);
+            
+            $sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Retiro Cesantias','$Correo','$base64_pdf')";
+            mysqli_query($conexion, $sql);
+
             mysqli_close($conexion);
+            echo "<script> alert('Se han descargado los archivos correctamente'); </script>";
+            
+            echo "<script> window.location='DG.php'; </script>";
            
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
