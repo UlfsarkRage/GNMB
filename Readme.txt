@@ -18,3 +18,5 @@ El aplicativo tiene una hoja de código configurable apra poder enviar los archi
 Al ser un aplicativo de prueba el codigo se ejecuta mediante la app de Xampp y PHPmyadmin.
 
 Ruta de guardado de archivos(C:\xampp\htdocs\Proyectos\Documentos_Generados\)
+
+Cargar los archivos.sql en PHPMyadmin
