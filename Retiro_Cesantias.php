@@ -1,45 +1,100 @@
 <?php
 // include class
 require('fpdf/fpdf.php');
+include("Conexion.php");
 
 
 if(isset($_POST['Identificación_2'])){
 
-
-   
-
     $ID = $_POST['Identificación_2'];
+    $sql = "select * from empleados where Numero_Documento = ".$ID." and Fecha_Salida is null";
+    $Cn1 = mysqli_query($conexion, $sql);
+    $Exist = mysqli_fetch_array($Cn1);
 
-    
-    // create document
-    $pdf = new FPDF();
-    $pdf->AddPage();
+    if( $Exist[2] != null ){
+   
+        
+        $Fecha = date("j, n, Y");
+        $Fecha_Hora = date("d-m-Y h:i:s");
+        $Nombre = $Exist[2];
+        $Cargo = $Exist[5];
+        $Salario = $Exist[7];
+        $Fecha_Ingreso = $Exist[3];
+        $Correo = $Exist[6];
+        
 
-    // config document
-    $pdf->SetTitle('Solicitud_Retiro_Cesantias');
-    $pdf->SetAuthor('GNMB');
-    $pdf->SetCreator('GNMB');
+        $sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Retiro de casantias','$Correo','N/A')";
 
-    // add title
-    $pdf->SetFont('Arial', 'B', 24);
-    $pdf->Cell(0, 10, 'Generar archivos PDF con PHP', 0, 1);
-    $pdf->Ln();
-    $pdf->Cell(0, 10,  'Hola ' . $ID , 0, 1);
-    $pdf->Ln();
+        if (mysqli_query($conexion, $sql)) {
 
-    // add text
-    $pdf->SetFont('Arial', '', 12);
-    $pdf->MultiCell(0, 7, utf8_decode('Los archivos PDF se utilizan ampliamente en documentos y reportes que necesitan mantener el diseño y contenido (imágenes, tipos de letra, colores, etc), por ello vamos a aprender a crear archivos PDF utilizando PHP.'), 0, 1);
-    $pdf->Ln();
-    $pdf->MultiCell(0, 7, utf8_decode('FPDF es una clase PHP que permite la generación de archivos PDF de forma sencilla y sin necesidad de instalar librerías adicionales, cuenta con métodos bien documentados que facilitan su uso.'), 0, 1);
-    $pdf->Ln();
-    $pdf->MultiCell(0, 7, utf8_decode('Antes de comenzar lo primero es descargar FPDF e incluir los archivos necesarios en nuestro proyecto.'), 0, 1);
-    $pdf->Ln();
+          
+        
+            // create document
+            $pdf = new FPDF();
+            $pdf->AddPage();
 
-    // add image
-    //$pdf->Image('assets/fpdf-code.png', null, null, 180);
+            // config document
+            $pdf->SetTitle('Solicitud_Certificado_Laboral');
+            $pdf->SetAuthor('GNMB');
+            $pdf->SetCreator('GNMB');
 
-    // output file
-    $pdf->Output('I', 'Retiro_Cesantias_'.$ID.'.pdf');
-    
+            // add title
+
+            $pdf->SetFont('Arial', 'B', 24);
+            $pdf->Cell(0, 10, ' '  , 0, 1);
+            $pdf->Ln();
+            $pdf->Ln();
+        
+            $pdf->Cell(0, 10, 'Bogota, ' . $Fecha , 0, 1);
+            $pdf->Ln();
+            $pdf->Ln();
+            $pdf->Ln();
+            //$pdf->Cell(0, 10,  'Hola ' . $Nombre , 0, 1);
+            //$pdf->Ln();
+            //$pdf->Cell(0, 10,  'Hola ' . $Nombre , 0, 1);
+            //$pdf->Ln();
+            $pdf->SetFont('Arial', 'B', 16);
+            $pdf->Cell(0, 8, 'A quien corresponda: ' , 0, 1);
+            $pdf->Ln();
+            $pdf->Cell(0, 8, 'ASUNTO: Retiro Parcial de Cesantias  ' , 0, 1);
+            $pdf->Ln();
+            $pdf->Ln();
+
+            // add text
+            $pdf->SetFont('Arial', '', 12);
+            $pdf->MultiCell(0, 7, utf8_decode('Según lo dispuesto en el artículo 21 de la Ley 1429 de 2010 (que modificó el Art. 256 del Código Sustantivo del Trabajo) y a la aclaración contenida en la Carta Circular 011 del 7 de Febrero de 2011 del Ministerio de la Protección Social, nos permitimos informarles que hemos autorizado el retiro parcial de vivienda del funcionario(a) señalado más adelante, en las siguientes condiciones: '), 0, 1);
+            $pdf->Ln();
+            $pdf->MultiCell(0, 7, utf8_decode('Nombre del funcionario: '.$Nombre.'.'), 0, 1);
+            $pdf->MultiCell(0, 7, utf8_decode('Identificación: '.$ID.'.'), 0, 1);
+            $pdf->MultiCell(0, 7, utf8_decode('Valor a retirar: __________________'), 0, 1);
+            $pdf->MultiCell(0, 7, utf8_decode('Concepto del retiro: __________________'), 0, 1);
+            $pdf->Ln();
+            
+            
+            $pdf->Ln();
+            $pdf->Ln();
+            $pdf->Ln();
+            $pdf->MultiCell(0, 7, utf8_decode('Nicolas Murcia Buitrago'), 0, 1);
+            $pdf->MultiCell(0, 7, utf8_decode('Gerente de Recursos Humanos'), 0, 1);
+            $pdf->Ln();
+
+            // add image
+            //$pdf->Image('assets/fpdf-code.png', null, null, 180);
+
+            // output file
+            $pdf->Output('I', 'Certificado_Laboral_'.$Nombre.'.pdf');
+            mysqli_close($conexion);
+           
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
+            mysqli_close($conexion);
+        }
+       
+    }
+    else {
+        mysqli_close($conexion);
+        echo "<script> alert('Usted no es colaborador actual en la compañia'); </script>";
+        echo "<script> window.location='DG.php'; </script>";
+    }
+
 }

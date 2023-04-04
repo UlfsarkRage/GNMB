@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Materials/LilMC.png" />
     <link rel="stylesheet" href="css/Estilos.css">
+    <!--<link rel="stylesheet" href="css/ebtn.css">-->
     <script src="../js/jquery-3.6.0.min.js"></script>
     <title>Generador de documentos</title>
 </head>
@@ -35,12 +36,31 @@
             <!--Selector del tipo de consulta-->
             <div class="selector">
                 <label for="selector1">Documento a Generar</label>
-                <select name="Tipo" id="selector1" onchange="M1(this.value);">
+                <select name="Tipo" id="selector1" onchange="M1(this.value);" required >
                     <option value="0">Seleccione</option>
                     <option value="b1">Certificado Laboral</option>
                     <option value="b2">Retiro de Cesantias</option>
                     <option value="b3">Apertura de Cuenta</option>
                 </select>
+            </div>
+            <div>
+                <a href="#" class="btn-neon">
+                    <span id="span1"></span>
+                    <span id="span2"></span>
+                    <span id="span3"></span>
+                    <span id="span4"></span>
+                    BOTON NEON
+                </a>
+                <div class="view">
+                    <div class="plane main">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </div>
             </div>
 
                 <!--Cuadros para ingreso de datos-->

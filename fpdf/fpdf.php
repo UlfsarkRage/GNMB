@@ -1020,6 +1020,7 @@ function Output($dest='', $name='', $isUTF8=false)
 			header('Pragma: public');
 			echo $this->buffer;
 			break;
+			//sleep(5);
 		case 'F':
 			// Save to local file
 			if(!file_put_contents($name,$this->buffer))

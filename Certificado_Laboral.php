@@ -13,7 +13,7 @@ if(isset($_POST['Identificación_1'])){
 
     if( $Exist[2] != null ){
    
-        
+        //Asignacion de datos a las variables
         $Fecha = date("j, n, Y");
         $Fecha_Hora = date("d-m-Y h:i:s");
         $Nombre = $Exist[2];
@@ -22,13 +22,18 @@ if(isset($_POST['Identificación_1'])){
         $Fecha_Ingreso = $Exist[3];
         $Correo = $Exist[6];
         
-
-        $sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Certificado Laboral','$Correo','N/A')";
-
-        if (mysqli_query($conexion, $sql)) {
-
-          
         
+        //$base64_pdf = "N/AA";
+        //$sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Certificado Laboral','$Correo','$base64_pdf')";
+
+        
+
+        
+
+        if (!empty($Nombre)) {
+
+
+                    
             // create document
             $pdf = new FPDF();
             $pdf->AddPage();
@@ -56,6 +61,8 @@ if(isset($_POST['Identificación_1'])){
             $pdf->SetFont('Arial', 'B', 16);
             $pdf->Cell(0, 8, 'A quien corresponda: ' , 0, 1);
             $pdf->Ln();
+            $pdf->Cell(0, 8, 'ASUNTO: Certificado Laboral  ' , 0, 1);
+            $pdf->Ln();
             $pdf->Ln();
 
             // add text
@@ -77,20 +84,43 @@ if(isset($_POST['Identificación_1'])){
 
             // add image
             //$pdf->Image('assets/fpdf-code.png', null, null, 180);
-
+            //$Ruta = "C:\xampp\htdocs\Proyectos\Documentos_Generados";
             // output file
-            $pdf->Output('I', 'Certificado_Laboral_'.$Nombre.'.pdf');
+            $pdf->Output('F', 'C:\xampp\htdocs\Proyectos\Documentos_Generados\Certificado_Laboral_'.$Nombre.' '.$Fecha.'.pdf');
+            //$pdf->Output('Certificado_Laboral_'.$Nombre.' '.$Fecha.'.pdf','D');
+
+            $file = file_get_contents('C:\xampp\htdocs\Proyectos\Documentos_Generados\Certificado_Laboral_'.$Nombre.' '.$Fecha.'.pdf');
+
+            $base64_pdf = base64_encode($file);
+            //$base64_pdf = "N/AA";
+            $sql = "insert into seguimiento_uso (`Numero_Documento`, `Nombre`, `Fecha`, `Tipo_Solicitud`, `A_donde_se_envia`, `Base_64`) VALUES ('$ID','$Nombre',current_timestamp(),'Certificado Laboral','$Correo','$base64_pdf')";
+            mysqli_query($conexion, $sql);
+        
+
+            
+
             mysqli_close($conexion);
+            echo "<script> alert('Se han descargado los archivos correctamente'); </script>";
+            //echo "<script> setTimeout(\"location.href='DG.php'\",1000) </script>";
+            echo "<script> window.location='DG.php'; </script>";
+
            
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conexion);
             mysqli_close($conexion);
         }
+            
+
+        //include("Movimiento_Archivo.php");
+
+        
+
        
     }
     else {
         mysqli_close($conexion);
         echo "<script> alert('Usted no es colaborador actual en la compañia'); </script>";
+        //echo "<script> setTimeout(\"location.href='DG.php'\",1000) </script>";
         echo "<script> window.location='DG.php'; </script>";
     }
 
